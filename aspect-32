@@ -1,0 +1,33 @@
+#!/bin/bash
+#
+# Usage: aspect-32 DIR 
+# Changes aspect ratio of all images in passed directory to 3:2,
+# and saves them in 'ratio' folder.
+
+DEBUG='false'
+
+dir="$1"
+resume="ratio"
+orig=""
+cd "$dir$orig"
+rm -rIf "$resume"
+mkdir "$resume"
+for k in `ls *.{jpg,JPG,png} 2>/dev/null`
+do
+    h=`identify -format "%h" $k`
+    w=`identify -format "%w" $k`
+    #If landscape
+    if [ $w -ge $h ]; then
+		order="../aspectcrop -a 3:2 $k $resume/$k"
+    else
+		order="../aspectcrop -a 2:3 $k $resume/$k"
+    fi
+
+    if [ "$DEBUG" == "true" ]; then
+        echo "$order"
+    else
+        eval "$order"
+    fi
+done
+
+

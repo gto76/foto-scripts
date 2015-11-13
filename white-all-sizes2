@@ -1,0 +1,8 @@
+#!/bin/bash
+#
+# Usage: white-all-sizes DIR
+
+./white-a3 "$@"
+./white-a4 "$@"
+./white-a4-separate "$@"
+./white-a5 "$@"

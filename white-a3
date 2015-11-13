@@ -1,0 +1,31 @@
+#!/bin/bash
+# script to resize and crop
+
+#DEBUG="true"
+DEBUG="false"
+BG_COLOR="grey93"
+
+dir="$1"
+resume="white-a3"
+orig=""
+cd "$dir$orig"
+rm -rIf "$resume"
+mkdir "$resume"
+mkdir "$resume/portrait"
+for k in `ls *.{jpg,JPG,png} 2>/dev/null`
+do
+	h=`identify -format "%h" $k`
+	w=`identify -format "%w" $k`
+	#If landscape
+	if [ $w -ge $h ]; then
+		order="convert $k -resize 1600x1200 -background $BG_COLOR -compose Copy -gravity center -extent 1600x1200 $resume/$k"
+	else
+		order="convert $k -resize 1200x1600 -background $BG_COLOR -compose Copy -gravity center -extent 1200x1600 -rotate 270 $resume/portrait/$k"
+	fi
+
+	if [ "$DEBUG" == "true" ]; then
+		echo "$order"
+	else
+		eval "$order"
+	fi
+done

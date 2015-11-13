@@ -1,0 +1,30 @@
+#!/bin/bash
+# script to resize and crop
+
+#DEBUG="true"
+DEBUG="false"
+
+dir="$1"
+resume="croped"
+orig=""
+cd "$dir$orig"
+rm -rIf "$resume"
+mkdir "$resume"
+for k in `ls *.{jpg,JPG} 2>/dev/null`
+do
+	h=`identify -format "%h" $k`
+	w=`identify -format "%w" $k`
+	#If landscape
+	if [ $w -ge $h ]; then
+		order="convert $k -crop 3072x2048+288+0 -resize 1600x1200 $resume/$k"
+	else
+		order="convert $k -crop 2048x3072+0+288 -resize 1600x1200 $resume/$k"
+	fi
+
+	if [ "$DEBUG" == "true" ]; then
+		echo "$order"
+	else
+		eval "$order"
+	fi
+done
+

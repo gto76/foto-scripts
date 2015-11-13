@@ -1,0 +1,10 @@
+#!/bin/bash
+#
+# Usage: crop-all-sizes DIR
+
+./crop-a3 "$@"
+./crop-a4 "$@"
+./crop-a4-separate "$@"
+./crop-a5 "$@"
+
+./white-all-sizes "$@"

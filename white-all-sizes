@@ -1,0 +1,18 @@
+#!/bin/bash
+#
+# Usage: white-all-sizes DIR
+
+./white-a3 "$@"edit
+./white-a4 "$@"edit
+./white-a4-separate "$@"edit
+./white-a5 "$@"edit
+
+cp -r  "$@"edit/white-a3/* "$@"crop-a3
+cp -r "$@"edit/white-a4/* "$@"crop-a4
+cp -r "$@"edit/white-a4-separate/* "$@"crop-a4-separate
+cp -r  "$@"edit/white-a5/* "$@"crop-a5
+
+rm -rIf  "$@"edit/white-a3 
+rm -rIf "$@"edit/white-a4 
+rm -rIf "$@"edit/white-a4-separate
+rm -rIf  "$@"edit/white-a5 

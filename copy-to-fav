@@ -1,0 +1,17 @@
+#!/bin/bash
+#
+# Usage: copy-to-fav FILE
+# Copies all versions of file to the favourites directory
+
+FAV_DIR='_IZBOR_CANON'
+
+dir=$(dirname "$@")
+file=$(basename "$@")
+
+cp "$dir"/crop-a3/"$file" "$FAV_DIR"/a3 2> /dev/null
+cp "$dir"/crop-a3/portrait/"$file" "$FAV_DIR"/a3 2> /dev/null
+cp "$dir"/crop-a4/"$file" "$FAV_DIR"
+cp "$dir"/crop-a5/"$file" "$FAV_DIR"/a5
+cp "$dir"/orig/"$file" "$FAV_DIR"/orig
+cp "$dir"/crop-a4-separate/portrait/"$file" "$FAV_DIR"/a4 2> /dev/null
+cp "$dir"/crop-a4-separate/portrait-rotated/"$file" "$FAV_DIR"/framed 2> /dev/null
